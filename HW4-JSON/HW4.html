@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>Initial Page</title>
+	<style type="text/css">
+		body {text-align: center;}
+	</style>
+</head>
+<body>
+	
+	<br><br><br>
+
+	<form>
+		<h4> Enter URL for Trucking List JSON File </h4>
+		<input id = "input" type = "text" /> <!-- truckinglist.json -->
+		<br><br>
+		<input type = "submit" value= "Submit Query" onclick="JSONparse()">
+    </form>
+
+    <script type="text/javascript">
+
+    	function JSONparse () {
+    		var filename = document.getElementById("input").value;
+    		if (filename.length == 0) {
+    			alert("Text box cannot be emtpy!");
+    		}
+    		else {
+    			var jsonObj = loadJSON(filename);
+    			newWind(jsonObj);
+    		}
+    	}
+
+		function loadJSON (url) {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("GET",url,false); //open, send, responseText are
+			xmlhttp.send(); //properties of XMLHTTPRequest
+			handle(xmlhttp);
+
+			var jsonDoc = xmlhttp.responseText;
+			var jsonObj = JSON.parse(jsonDoc);
+			return jsonObj;
+		}
+
+		function handle(xmlhttp) {
+			if(xmlhttp.readyState == 4) {
+				if(xmlhttp.status == 404) {
+			    	alert("URL not found!");
+			    }
+			}
+		}
+
+		// ....... processing the document goes here 
+		var html_text;
+		function newWind(jsonObj) {
+			jsonObj.onload=generateHTML(jsonObj);
+			// var wind = window.open("", "HW4", "height = 800, width = 600");
+			
+			if (html_text != "alert") {
+				var wind = window.open();
+				wind.document.write(html_text);
+				wind.document.close();
+			}
+
+			
+		}
+
+		function generateHTML(jsonObj)   {
+        	root=jsonObj.DocumentElement; 
+        	html_text="<!DOCTYPE html><html><head><title>Top Trucking Companies</title><style type='text/css'> ul {margin-top: 0;}</style></head><body>";
+         	html_text+="<table border='2'>"; 
+        	// caption=jsonObj.catalog.title; 
+        	// html_text+="<caption align='left'><h1>"+caption+"</h1></caption>";
+        	// html_text+="<tbody>"; 
+        	html_text+="<tr>"; 
+         	// x=0;  y=0;
+	 		// output the headers
+	 		var header_keys = jsonObj.Mainline.Table.Header.Data;
+	 		if (header_keys.length != 6) {
+	 			alert("The number of headers is wrong!");
+				html_text = "alert";
+				return;
+	 		}
+        	for(i = 0;i < header_keys.length; i++) { 
+	 			header = header_keys[i];
+				// if(header=="Parent Company") {  header="Parent Company";  x=120;  y=55;  }
+				// else if(header=="Subsidiary Portfolio / Services") {x=100;  y=67;}
+				// else if(header=="HQ / Info") {}
+				// else if(header=="Annual Revenue ($ million)") {}			 
+				// else if(header=="HomePage") {}
+				// else if(header=="Logo") {}
+				// else alert("Wrong header data value!")
+				html_text+="<th>"+header+"</th>";    			
+			} 
+			html_text+="</tr>";
+			if (!jsonObj.Mainline.hasOwnProperty("Table")) {
+				alert("The JSON file containing NO trucking companies!");
+				html_text = "alert";
+				return;
+			}
+			if (!jsonObj.Mainline.Table.hasOwnProperty("Row")) {
+				alert("The JSON file containing NO trucking companies!");
+				html_text = "alert";
+				return;
+			}
+			var companies = jsonObj.Mainline.Table.Row;
+			if (companies.length == 0) {
+				alert("The JSON file containing NO trucking companies!");
+				html_text = "alert";
+				return;
+			}
+			// output out the values
+		    for(i = 0; i < companies.length; i++) //do for all companies (one per row)
+		    {
+				company=companies[i]; //get properties of a company (an object)
+			    html_text+="<tr>";      //start a new row of the output table
+		        var company_keys = Object.keys(company);
+		        for(j = 0; j < company_keys.length; j++) 
+			    {
+		            prop = company_keys[j];
+				    if(company_keys[j]=="Logo")		
+				    {//handle images separately	
+				    	if (company[prop] === null || company[prop] === "") html_text+="<td></td>";
+				    	else html_text+="<td><img src='"+ company[prop] +"' width='"+280+"' height='"+150+"'></td>";
+				    	// html_text+="<td><img src='"+ company[prop] +"'></td>";
+				    }
+				    else if (company_keys[j] == "HomePage") {
+				    	if (company[prop] === null || company[prop] === "") html_text+="<td></td>";
+				    	else html_text+="<td><a href="+company[prop]+">"+company[prop]+"</a></td>";
+				    	//else html_text+="<td><a href="+company[prop]+" target='_blank'>"+company[prop]+"</a></td>";
+				    }
+				    else if (company_keys[j] == "Hubs") {
+				    	hub = company[prop].Hub;
+				    	// html_text += "<td valign='top'><ul>";
+				    	html_text += "<td><ul>";
+				    	for (k = 0; k < hub.length; k++) {
+				    		if (hub[k] === null || hub[k] === "") html_text += "<li></li>";
+				    		else {
+				    			if (k == 0) html_text += "<li><b>" + hub[k] + "</b></li>";
+				    			else html_text += "<li>" + hub[k] + "</li>";
+				    		}
+				    	}
+				    	html_text += "</ul></td>";
+				    	// html_text+="<td>hubs</td>";
+				    }
+				    else {
+				    	if (company[prop] === null || company[prop] === "") html_text+="<td></td>";
+						else html_text+="<td>"+ company[prop] +"</td>";
+				    }
+				} 		           
+			html_text+="</tr>";
+			}
+			// html_text+="</tbody>"; 
+		 	html_text+="</table>";           
+			html_text+="</body></html>";
+		}
+
+
+    </script>
+
+</body>
+</html>
+
+<!-- Window.open() method must be used to pop up a new window which would
+display the final widget.  -->
+
+<!-- You should use the DOM document.write method to output the
+required HTML.  -->
+
+<!-- if (trucking_keys[j]=="Image") {
+ // do stuff
+}
+for (j=0; j<trucking_keys.length; j++) {
+ // do more stuff
+}  -->
