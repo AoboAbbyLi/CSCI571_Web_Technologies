@@ -1,0 +1,317 @@
+
+body {
+	width: 1192px;
+	padding-left: 0;
+  overflow-x: hidden;
+}
+
+.crop {
+	  /*width: 1194px;*/
+    width: 1322px;
+  	/*height: 650px;*/
+    /*height: 810px;*/
+    height: 855px;
+  	margin: 0 0 0 -150px;
+    background-image: url('http://cs-server.usc.edu:45678/hw/hw3/images/image6.jpg');
+    /*background-size: 1500px 840px;*/
+    background-size: 1920px 1190px;
+    /*background-position: -380px 50px;*/
+    background-position: -370px 42px;
+  	background-repeat:no-repeat;
+  	background-attachment:fixed;
+  	overflow: hidden;
+}
+
+.scroll {
+	 width: 1192px; 
+	 height: 3600px; 
+   position:absolute;
+   left:0px;
+   top:0px;
+	 /*background-color: transparent;*/
+   /*opacity: 0;*/
+/*	 repeat-y;
+	 scroll;
+	 center;*/
+	 padding-left: 130px;
+}
+
+.head {
+  width: 1192px;
+  height: 212px;
+  background-color: white;
+  margin-left: -130px;
+  padding-left: 130px;
+/*  position:absolute;
+   left:0px;
+   top:0px;
+   padding-left: 130px;*/
+}
+
+.address {
+  height: 30px;
+  font-size: 14px;
+  /*font-family: "Zapf Dingbats";*/
+  /*font-family: Helvetica Neue;*/
+  font-family: Arial;
+  color: #605E5E;
+	margin-left: 30px;
+  /*margin-top: 25px;*/
+  padding-top: 26px;
+}
+.name {
+  font-size: 61px;
+  font-family: Sans-serif;
+  letter-spacing: 8px;
+  color: #B89C62;
+	margin-left: 335px;
+	/*margin-bottom: 48px;*/
+  padding-bottom: 48px;
+  padding-top: 1px;
+  /*margin-top: -4px;*/
+}
+.line {
+  margin-left: -130px;
+  border-top: 1px #E9E9E9 solid;
+  height: 20px;
+  width: 1180px;
+}
+.menu {
+  font-family:  Arial;
+	margin-left: 45px;
+  height: 45px;
+}
+
+.option {
+  height: 45px;
+  font-size: 14px;
+	float: left;
+  margin-top: -4px;
+	padding-right: 137px;
+}
+.link {
+  text-decoration: none;
+  outline: none;
+  color: #605E5E;
+}
+.home {
+  color: #B89C62;
+}                           
+
+.rectangle {
+    width: 1192px;
+    /*height: 650px;*/
+    height: 440px;
+    /*top: 210px;*/
+    /*background-color: transparent;*/
+    /*opacity: 0;*/
+}                              
+
+
+.halfInfo {
+  /*height: 1300px;*/
+  height: 1190px;
+  /*height: 1000px;*/
+  /*background-color: white;*/
+  margin-top: 210px;
+}
+
+.half {
+  /*position: relative;*/
+  /*top: 210px;*/
+	float: left;
+	width: 444px;
+  height: 1000px;
+	margin-right: 40px;
+}
+.left {
+	margin-left: 131px;
+}
+.img3 {
+	/*width: 100%;*/
+  width: 444px;
+  height: 500px;
+	margin-top: 128px;
+}
+.img2 {
+	width: 444px;
+  height: 257px;
+	margin-top: 40px;
+	margin-bottom: 67px;
+}
+.intro {
+  margin-left: 15px;
+}
+.upper {
+	margin-top: 45px;
+	/*margin-bottom: 15px;*/
+  font-size: 12px;
+  font-family: Arial;
+  letter-spacing: 2px;
+  color :#605E5E;
+}
+.title {
+  font-size: 36px;
+  font-style : italic;
+  font-weight: 600;
+  /*font-family: Sans-serif;*/
+  line-height: 40px;
+  color: #B89C62;
+  padding-top: 8px;
+}
+.title1 {
+  padding-top: 9px;
+}
+.content {
+  font-size: 15px;
+  font-family: Arial;
+  letter-spacing: 1px;
+  line-height: 21px;
+  padding-top: 8px;
+  color: #605E5E;
+}
+.read {
+  padding-top: 16px;
+  font-size: 16px;
+  /*font-family: "Libre Baskerville";*/
+  font-family: Arial;
+  color: black;
+}
+.read a:hover {
+  color: #D4D4D4;
+}
+.read1 {
+  padding-top: 10px;
+}
+.black {
+  color: black;
+}
+.img1 {
+	width: 446px;
+  height: 309px;
+	margin-top: 97px;
+}
+.img4 {
+	width: 446px;
+  height: 460px;
+	margin-top: 36px;
+}
+.order {
+    width: 930px;
+    height: 600px;
+    /*height: 800px;*/
+    /*margin-left: 2px;*/
+    margin-top: 70px;
+    /*padding-top: 20px;*/
+    background-image: url('http://cs-server.usc.edu:45678/hw/hw3/images/image7.jpg');
+    background-size: 928px 600px;
+    /*background-position: 5px 0;*/
+    background-repeat:no-repeat;
+}
+
+.orderMiddle {
+  width: 390px;
+  height: 140px;
+  text-align: center;
+  position: relative;
+  top: 224px;
+  left: 270px;
+  background-color: white;
+}
+
+.greens {
+  position: relative;
+  top: 46px;
+  margin-top: 45px;
+  /*margin-bottom: 15px;*/
+  font-size: 11px;
+  font-family: Arial;
+  letter-spacing: 2px;
+}
+.orderOnline {
+/*  position: relative;
+  top: 40px;*/
+  margin-top: 51px;
+  font-size: 34px;
+  font-family: Baskerville;
+  /*font-weight: 600;*/
+}
+
+.orderOnline a:hover {
+  color: #D4D4D4;
+}
+.title3 {
+  padding-top: 15px;
+}
+.end {
+  padding-top: 8px;
+  width: 926px;
+  /*height: 265px;*/
+  height: 500px;
+  background-color: white;
+  /*height: 500px*/
+  text-align: center;
+}
+
+.rectangle2 {
+    width: 1192px;
+    /*height: 650px;*/
+    height: 351px;
+    /*height: 478px;*/
+    /*top: 210px;*/
+    /*background-color: transparent;*/
+    /*opacity: 0;*/
+    /*start of the image2*/
+    margin-top: -104px;
+    /*margin-top: -108px;*/
+}     
+
+.yellowTail {
+  width: 1192px;
+  height: 213px;
+  background-color: #B89C62;
+  margin-left: -130px;
+  margin-top: -9px;
+}
+
+.copyright {
+  position: relative;
+  top: 52px;
+  left: 770px;
+  color: white;
+  font-size: 13px;
+  font-family: Arial;
+  font-weight: bold;
+}
+
+.whiteTail {
+  width: 1192px;
+  height: 40px;
+  background-color: white;
+  margin-left: -130px;
+}
+
+.crop2 {
+    opacity: 0.8;
+    width: 1192px;
+    height: 478px;
+    position:absolute;
+    left:0px;
+    /*important yellow height and scroll height*/
+    /*top:2960px;*/
+    top:2990px; 
+    /*margin: 0 0 0 -150px;*/
+    background-image: url('http://cs-server.usc.edu:45678/hw/hw3/images/image5.jpg');
+    background-size: 1192px;
+    /*background-position: 0 3000px;*/
+    background-position: 0 -203px;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    overflow: hidden;
+}
+
+
+
+
+
+
