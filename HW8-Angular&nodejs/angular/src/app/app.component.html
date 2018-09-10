@@ -1,0 +1,13 @@
+<div class="container">
+
+	<app-form
+		(search)='search($event)' (progressDisplayEmitter)="getProgressDisplay($event)" (searchFail)="getSearchFail($event)"
+		(formClearEmitter)='getFormClear($event)'>
+	</app-form>
+
+
+	<br>
+	<!-- <app-searchtable [hidden]="detailsSelected" (details)='getDetails($event)' (detailPlace)='getDetailPlace($event)' [searchData]="searchData"></app-searchtable> -->
+	<app-searchtable [searchData]="searchData" [progressDisplay]="progressDisplay" [searchFail]="searchFail" [formClear]="formClear"></app-searchtable>
+	
+</div>

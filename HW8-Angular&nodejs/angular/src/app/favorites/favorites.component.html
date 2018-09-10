@@ -1,0 +1,47 @@
+
+<div *ngIf="!hasNoRecords" class="container">
+	<div class="y-scroll">
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Category</th>
+		      <th scope="col">Name</th>
+		      <th scope="col">Address</th>
+		      <th scope="col">Favorite</th>
+		      <th scope="col">Details</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <!-- <tr *ngFor="let place of favoriteData; let i = index" [class.highlight]="placeSelected&&place.placeID==placeSelected.placeID"> -->
+		    <tr *ngFor="let place of favoritePage; let i = index" [class.highlight]="placeSelected&&place.placeID==placeSelected.placeID">
+		      <th class="align-middle" scope="row">{{i+1}}</th>
+		      <td class="align-middle"><img src='{{place.category}}' height='35px' width='35px'></td>
+		      <td class="align-middle">{{place.name}}</td>
+		      <td class="align-middle">{{place.address}}</td>
+					<td class="align-middle">
+						<button type="button" class="btn btn-light" (click)="clickDelete(place, i)"><i class="fas fa-trash-alt"></i></button>
+					</td>
+					<td class="align-middle">
+						<button type="button" class="btn btn-light" (click)="clickDetails(place)"><i class="fas fa-arrow-right"></i></button>
+					</td>
+		    </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+<div class="text-center">
+	<button type="button" class="btn btn-light" [hidden]="endIndex<20" (click)="clickPrevious()">Previous</button>
+	<button type="button" class="btn btn-light" [hidden]="endIndex>=favoriteData.length-1" (click)="clickNext()">Next</button>
+</div>
+
+<div *ngIf="hasNoRecords">
+	<br><br><br><br>
+	<div class="alert alert-warning" role="alert">
+	  No records.
+	</div>
+	<br><br><br><br>
+</div>
+
+<br>

@@ -1,0 +1,451 @@
+<br>
+
+<div *ngIf="!searchFail">
+
+  <h4 class="text-center"> {{placeName}} </h4>
+  
+  <div class="d-flex justify-content-end">
+    <div class="mr-auto">
+      <button class="btn btn-light" (click)="clickList()"><i class="fas fa-chevron-left"></i> List</button>
+    </div>
+    <!-- <div *ngIf="place" class="d-flex justify-content-end"> -->
+    <div class="ml-auto d-flex justify-content-end">
+      <button *ngIf="place" type="button" class="favorite btn btn-light" (click)="clickFavorite()" [disabled]="!placeData"><i [class]="place.favorite?'fas fa-star':'far fa-star'"></i></button>
+        &nbsp;
+        <!--   <a href="https://twitter.com/intent/tweet?text={{text}}"><img class="twitter" src="http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png"></a> -->
+        <button type="button" class="twitterButton" (click)="clickTwitter()" [disabled]="!placeData"><img class="twitter" src="http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png"></button>
+        <!-- <button type="button" class="twitterButton" (click)="window.open('https://twitter.com/intent/tweet', 'mypopup')"><img class="twitter" src="http://cs-server.usc.edu:45678/hw/hw8/images/Twitter.png"></button> -->
+    </div>
+  </div>
+<!-- <dialog open><p>something</p></dialog> -->
+
+  <ul class="nav nav-tabs justify-content-end" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='info'" id="nav-info" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true" (click)="selected='info'">Info</a>
+    </li>
+     <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='photo'" data-toggle="tab" href="#photo" role="tab" aria-controls="photo" aria-selected="false" (click)="clickPhoto()">Photo</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='map'" data-toggle="tab" href="#mapTab" role="tab" aria-controls="mapTab" aria-selected="false" (click)="selected='map'">Map</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='reviews'" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false" (click)="selected='reviews'">Reviews</a>
+    </li>
+  <!--   <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='info'" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="true" (click)="clickInfo()">Info</a>
+    </li> -->
+  <!--   <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='photos'" (click)="clickPhotos()">Photos</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='map'" (click)="clickMap()">Map</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" [class.active]="selected=='reviews'" (click)="clickReviews()">Reviews</a>
+    </li> -->
+  </ul>
+
+  <div class="tab-content">
+    <div class="tab-pane" [class.show]="selected=='info'" [class.active]="selected=='info'" id="info" role="tabpanel" aria-labelledby="info-tab">
+      <div class="y-scroll">
+        <table *ngIf="placeData" class="table table-striped">
+          <tbody>
+    <!--         <tr *ngFor="let ainfo of info">
+              <th scope="row">{{ainfo.key}}</th>
+              <td>{{ainfo.value}}</td>
+            </tr> -->
+            <tr *ngIf="placeData.formatted_address">
+              <th class="nowrap" scope="row">Address</th>
+              <td class="nowrap">{{placeData.formatted_address}}</td>
+            </tr>
+            <tr *ngIf="placeData.international_phone_number">
+              <th class="nowrap" scope="row">Phone Number</th>
+              <td class="nowrap">{{placeData.international_phone_number}}</td>
+            </tr>
+            <tr *ngIf="placeData.price_level">
+              <th class="nowrap" scope="row">Price Level</th>
+              <td class="nowrap">{{placeData.price}}</td>
+            </tr>
+            <tr *ngIf="placeData.rating">
+              <th class="nowrap" scope="row">Rating</th>
+              <td class="nowrap">{{placeData.rating}}
+                <div class="stars-outer"><!-- <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i> -->
+                  <div class="stars-inner" [style.width]="placeData.ratingWidth">
+                    <!-- <div class="stars-inner"> -->
+                    <!-- <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i> -->
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="placeData.url">
+              <th class="nowrap" scope="row">Google Page</th>
+              <td class="nowrap"><a href="{{placeData.url}}" target="_blank">{{placeData.url}}</a></td>
+            </tr>
+            <tr *ngIf="placeData.website">
+              <th class="nowrap" scope="row">Website</th>
+              <td class="nowrap"><a href="{{placeData.website}}" target="_blank">{{placeData.website}}</a></td>
+            </tr>
+            <tr *ngIf="placeData.opening_hours">
+              <th class="nowrap" scope="row">Hours</th>
+              <td class="nowrap">
+                <span *ngIf="placeData.opening_hours.open_now">Open&nbsp;&nbsp;</span>
+                <span *ngIf="!placeData.opening_hours.open_now">Closed&nbsp;&nbsp;</span>
+                <!-- <a href="javascript:void(0)" (click)="clickHours()">Daily open hours</a> -->
+                <a href="javascript:void(0)" data-toggle="modal" data-target="#hoursModal1" class="btnNoOutline" (click)="clickOpenHours()">Daily open hours</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Modal -->
+<!--     <div *ngIf="placeData" class="modal fade" id="hoursModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Open hours</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class="table" id="hours">
+              <tbody>
+                <tr *ngFor="let day of placeData.hours; let i = index" [class.bold]="i==0">
+                  <td>{{day[0]}}</td>
+                  <td>{{day[1]}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="tab-pane" [class.show]="selected=='photo'" [class.active]="selected=='photo'" id="photo" role="tabpanel" aria-labelledby="photo-tab">
+
+      <div *ngIf="photos&&photos.length>0">
+        <!-- <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "horizontalOrder": true, "percentPosition": true, "columnWidth": ".grid-sizer", "itemSelector": ".grid-item" }'> -->
+<!--         <div class="grid">
+          <div *ngFor="let url of photos" class="grid-item">
+            <div class="card">
+                <a href="{{url}}" target="_blank">
+                  <img src="{{url}}" class="card-img">
+                </a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+<!--       <div *ngIf="photos&&photos.length>0">
+        <div class="bricklayer">
+          <div *ngFor="let url of photos" class="item">
+            <div class="card">
+                <a href="{{url}}" target="_blank">
+                  <img src="{{url}}" class="card-img">
+                </a>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+<!--           <div *ngIf="photos&&photos.length>0" class="card-columns">
+              <div *ngFor="let url of photos" class="card">
+                <a href="{{url}}" target="_blank">
+                  <img src="{{url}}" class="card-img">
+                </a>
+              </div>
+          </div>
+        </div> -->
+  
+<!--         <div class="d-none d-lg-block card-columns display: inline-block">
+            <table *ngFor="let url of photos; let i = index">
+              <tr *ngIf="i==0 || i==4 || i==8"><td>
+                <div class="card">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </td></tr>
+            </table>
+
+            <table *ngFor="let url of photos; let i = index">
+              <tr *ngIf="i==1 || i==5 || i==9"><td>
+                <div class="card">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </td></tr>
+            </table>
+
+            <table *ngFor="let url of photos; let i = index">
+              <tr *ngIf="i==2 || i==6 || i==10"><td>
+                <div class="card">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </td></tr>
+            </table>
+
+            <table *ngFor="let url of photos; let i = index">
+              <tr *ngIf="i==3 || i==7 || i==11"><td>
+                <div class="card">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </td></tr>
+            </table>
+        </div> -->
+
+<!--         <div class="col-3">
+            <table *ngFor="let url of photos; let i = index">
+              <tr *ngIf="i==1 || i==5 || i==9"><td>
+                <div class="card">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </td></tr>
+            </table>
+          </div> -->
+
+        <div class="d-none d-md-block">
+          <div class="d-flex justify-content-between">
+          <!-- <div class="row"> -->
+            <!-- <div class="col-3"> -->
+            <div class="one-forth">
+              <div *ngFor="let url of photos; let i = index">
+                <div *ngIf="i==0 || i==4 || i==8" class="card photo">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-3"> -->
+            <div class="one-forth">
+              <div *ngFor="let url of photos; let i = index">
+                <div *ngIf="i==1 || i==5 || i==9" class="card photo">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-3"> -->
+            <div class="one-forth">
+              <div *ngFor="let url of photos; let i = index">
+                <div *ngIf="i==2 || i==6 || i==10" class="card photo">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="col-3"> -->
+            <div class="one-forth">
+              <div *ngFor="let url of photos; let i = index">
+                <div *ngIf="i==3 || i==7 || i==11" class="card photo">
+                  <a href="{{url}}" target="_blank">
+                    <img src="{{url}}" class="card-img">
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="d-block d-md-none">
+              <div *ngFor="let url of photos" class="card">
+                <a href="{{url}}" target="_blank">
+                  <img src="{{url}}" class="card-img">
+                </a>
+              </div>
+        </div>
+      
+    </div>
+
+      <div *ngIf="photos&&photos.length==0">
+        <br><br><br><br>
+        <div class="alert alert-warning" role="alert">
+          No records.
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tab-pane" [class.show]="selected=='map'" [class.active]="selected=='map'" id="mapTab" role="tabpanel" aria-labelledby="map-tab">
+      <form (ngSubmit)="onFormSubmit(mapf)" #mapf="ngForm" method="get">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="inputFrom">From</label>
+            <input type="text" class="form-control" id="inputFrom" name="mapInput" value="Your location" required 
+              pattern="\s*\S+[\s\S]*" ngModel #formInput="ngModel" (input)="inputChange(formInput)">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="inputTo">To</label>
+            <input type="text" class="form-control" id="inputTo" [value]="routeTo" disabled>
+          </div>
+          <div class="form-group col-md-2">
+            <label for="selectMode">Travel Mode</label>
+            <select class="custom-select mr-sm-2" id="selectMode" name="selectMode">
+              <option value="DRIVING" selected>Driving</option>
+              <option value="BICYCLING">Bicycling</option>
+              <option value="TRANSIT">Transit</option>
+              <option value="WALKING"> Walking</option>
+            </select>
+          </div>
+          <div class="form-group col-md-2 d-flex align-items-end justify-content-lg-center">
+             <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+            <button id="getDirections" type="submit" class="btn btn-primary" [disabled]="(!mapf.form.valid)&&formInputChange">Get Directions</button>
+            <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+          </div>
+        </div>
+      </form>
+      <div id="mapButton">
+        <button [hidden]="mapDisplay" (click)="clickMap()" class="btn btn-light small"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/Map.png" height="30px" width="30px"></button>
+        <button [hidden]="!mapDisplay" (click)="clickStreet()" class="btn btn-light small"><img src="http://cs-server.usc.edu:45678/hw/hw8/images/Pegman.png" height="30px" width="30px"></button>
+      </div>
+      <div id="map" [hidden]="!mapDisplay">
+      </div>
+      <div id="street" [hidden]="mapDisplay">
+      </div>
+      <div id="directionsPanel">
+      </div>
+    </div>
+    <div class="tab-pane" [class.show]="selected=='reviews'" [class.active]="selected=='reviews'" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+      <div class="d-flex flex-row">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{sourceSelected}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" (click)="clickGoogle()">Google Reviews</a>
+            <a class="dropdown-item" (click)="clickYelp()">Yelp Reviews</a>
+          </div>
+        </div>
+
+        <div class="dropdown ml-3">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownOrderButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{orderSelected}}
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownOrderButton">
+            <a class="dropdown-item" (click)="clickDefault()">Default Order</a>
+            <a class="dropdown-item" (click)="clickHighestRating()">Highest Rating</a>
+            <a class="dropdown-item" (click)="clickLowestRating()">Lowest Rating</a>
+            <a class="dropdown-item" (click)="clickMostRecent()">Most Recent</a>
+            <a class="dropdown-item" (click)="clickLeastRecent()">Least Recent</a>
+          </div>
+        </div>
+      </div>
+
+      <div [hidden]="sourceSelected!='Google Reviews'" [@reviewsAnimation]="sourceClicked">
+        <div *ngFor="let review of reviews" class="card w-100">
+          <div class="card-body">
+            <table>
+              <tr>
+                <td valign="top" class="profile">
+                  <div *ngIf="review.profile_photo_url" class="float-top">
+                    <a href="{{review.author_url}}" target="_blank"><img src="{{review.profile_photo_url}}" height="60px" class="rounded-circle"></a>
+                  </div>
+                </td>
+                <td>
+                  <div>
+                    <a href="{{review.author_url}}" target="_blank">{{review.author_name}}</a><br>
+                    <span class="rating" *ngFor="let star of review.ratingArr"><i class="fas fa-star"></i></span>
+                    <span> {{review.time}}</span><br>
+                    {{review.text}}<br>
+                  </div>
+                </td>
+              </tr>
+            </table>
+          </div>
+<!--                   <div class="d-flex flex-row align-items-start">
+                    <div class="float-left profile"><a href="{{review.author_url}}" target="_blank"><img src="{{review.profile_photo_url}}" height="60px" class="rounded-circle"></a></div>
+                    <div class="float-left">
+                      <a href="{{review.author_url}}" target="_blank">{{review.author_name}}</a><br>
+                      <span class="rating" *ngFor="let star of review.ratingArr"><i class="fas fa-star"></i></span>
+                      <span> {{review.time}}</span><br>
+                      {{review.text}}<br>
+                    </div>
+                  </div> -->
+          </div>
+        <!-- </div> -->
+        <!-- </div> -->
+        <div *ngIf="!reviews||reviews.length==0" class="alert alert-warning" role="alert">
+          No records.
+        </div>
+      </div>
+
+      <div [hidden]="sourceSelected!='Yelp Reviews'" [@reviewsAnimation]="sourceClicked">
+        <div *ngFor="let review of yelpReviews" class="card w-100">
+          <div class="card-body">
+            <table>
+                <tr>
+                  <td  valign="top" class="profile">
+                    <div *ngIf="review.user.image_url" class="d-flex flex-row align-items-start">
+                      <a href="{{review.url}}" target="_blank"><img src="{{review.user.image_url}}" height="60px" width="60px" class="rounded-circle"></a>
+                    </div>
+                  </td>
+                  <td>
+                    <div>
+                      <a href="{{review.url}}" target="_blank">{{review.user.name}}</a><br>
+                      <span class="rating" *ngFor="let star of review.ratingArr"><i class="fas fa-star"></i></span>
+                      <span> {{review.time_created}}</span><br>
+                      {{review.text}}<br>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+          </div>
+        </div>
+
+        <div *ngIf="(!yelpReviews||yelpReviews.length==0)&&(!yelpFail)">
+          <br><br><br><br>
+          <div class="alert alert-warning" role="alert">
+            No records.
+          </div>
+          <br><br><br><br>
+        </div>
+
+        <div *ngIf="yelpFail">
+          <br><br><br><br>
+          <div class="alert alert-danger" role="alert">
+            Failed to get search Results.
+          </div>
+          <br><br><br><br>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="searchFail"> 
+  <br><br><br><br>
+  <div class="alert alert-danger" role="alert">
+    Failed to get search results.
+  </div>
+  <br><br><br><br>
+</div>
+
+<!-- <app-info [hidden]="selected!='info'" [info]="info"></app-info> -->
+<!-- <app-info *ngIf="selected=='info'" [info]="info"></app-info> -->
+<!-- <app-photos [hidden]="selected!='photos'" [photos]="photos"></app-photos>
+<app-map [hidden]="selected!='map'" [placeData]="placeData"></app-map>
+<app-reviews [hidden]="selected!='reviews'" [reviews]="reviews" [placeData]="placeData"></app-reviews> -->
+
+<!-- <app-info *ngIf="selected=='info'" [info]="info"></app-info>
+<app-photos *ngIf="selected=='photos'" [photos]="photos"></app-photos>
+<app-map *ngIf="selected=='map'"></app-map>
+<app-reviews *ngIf="selected=='reviews'" [reviews]="reviews"></app-reviews> -->
+

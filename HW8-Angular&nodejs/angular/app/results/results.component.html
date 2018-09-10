@@ -1,0 +1,43 @@
+
+<div *ngIf="hasData" class="container">
+	<div class="y-scroll">
+	<table *ngIf="!hasNoRecords" class="table table-hover">
+	  <thead>
+	    <tr>
+	      <th scope="col">#</th>
+	      <th scope="col">Category</th>
+	      <th scope="col">Name</th>
+	      <th scope="col">Address</th>
+	      <th scope="col">Favorite</th>
+	      <th scope="col">Details</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr *ngFor="let place of places" [class.highlight]="placeSelected&&place.placeID==placeSelected.placeID">
+	      <th class="align-middle" scope="row">{{place.num}}</th>
+	      <td class="align-middle"><img src='{{place.category}}' height='35px' width='35px'></td>
+	      <td class="align-middle">{{place.name}}</td>
+	      <td class="align-middle">{{place.address}}</td>
+				<td class="align-middle">
+					<button type="button" class="btn btn-light" (click)="clickFavorite(place)"><i [class]="place.favorite?'fas fa-star':'far fa-star'"></i></button>
+				</td>
+				<td class="align-middle">
+					<button type="button" class="btn btn-light" (click)="clickDetails(place)"><i class="fas fa-arrow-right"></i></button>
+					</td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+	<div class="text-center">
+		<button type="button" class="btn btn-light" [hidden]="!previous_page" (click)="clickPrevious()">Previous</button>
+		<button type="button" class="btn btn-light" [hidden]="isLastPage&&next_page_token==''?true:false" (click)="clickNext()">Next</button>
+	</div>
+
+	<div *ngIf="hasNoRecords"> 
+        <br><br><br><br>
+		<div class="alert alert-warning" role="alert">
+		  No records.
+		</div>
+		<br><br><br><br>
+	</div>
+</div>

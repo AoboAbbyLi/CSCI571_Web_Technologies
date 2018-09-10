@@ -1,0 +1,23 @@
+.container {
+	margin-bottom: 20px;
+}
+
+.highlight {
+	background-color: rgb(245, 218, 152);
+}
+.y-scroll {
+  overflow-y: scroll;
+}
+th {
+	white-space: nowrap;
+}
+td {
+	white-space: nowrap;
+}
+.btn-light {
+	background-color: white;
+	border-color: rgb(230, 230, 230);
+}
+.btn-light:hover {
+	background-color: rgb(234, 234, 234);
+}

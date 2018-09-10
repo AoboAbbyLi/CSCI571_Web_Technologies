@@ -1,0 +1,82 @@
+<div class="outer rounded p-3 container col-md-10">
+  <div class="container col-md-9">
+    <form (ngSubmit)="onFormSubmit(f)" #f="ngForm"
+    class="needs-validation" method="get">
+
+      <div class="form-group row d-flex justify-content-center">
+  <!--       <div class="col-sm-3"></div>
+        <div class="col-sm-9"> -->
+          <h4 class="text-center">Travel and Entertainment Search</h4>
+        <!-- </div> -->
+      </div>
+    
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Keyword<span class="red">*</span></label>
+        <div class="col-sm-9">
+          <input 
+            type="text" 
+            id="keyword" 
+            class="form-control" 
+            name="keyword"
+            [(ngModel)]="keywordValue"
+            #keyword="ngModel"
+            required
+            pattern="\s*\S+[\s\S]*"
+            >
+          <!-- <div *ngIf="keyword.errors && keyword.touched">The key word errors</div> -->
+          <div class="invalid-message" *ngIf="!keyword.valid && keyword.touched">Please enter a keyword.</div>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Category</label>
+        <div class="col-sm-6">
+          <select id="category" class="custom-select" name="category" [(ngModel)]="category">
+            <option *ngFor = "let category of categories" [value]="category.value">{{ category.type }}</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">Distance (miles)</label>
+        <div class="col-sm-6">
+          <input type="text" id="distance" class="form-control" name="distance" placeholder="10"
+          [(ngModel)]="distance">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-3 col-form-label">From<span class="red">*</span></label>
+        <div class="col-sm-9">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="here" name="from" value="here" checked [(ngModel)]="fromradio" (click)="clickHere($event)"> 
+            <label class="form-check-label">Current location</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" id="other" name="from" value="other" [(ngModel)]="fromradio" (click)="clickOther($event)">
+            <label class="form-check-label">Other. Please specify:</label>
+            <input 
+              class="form-control" 
+              type="text" 
+              id="location" 
+              name="location" 
+              placeholder="Enter a location" 
+              [disabled]="hereClicked"
+              [(ngModel)]="locationValue"
+              #location="ngModel"
+              required 
+              pattern="\s*\S+[\s\S]*">
+              <div class="invalid-message" *ngIf="!location.valid && location.touched && !hereClicked">Please enter a location.</div>
+          </div>
+        </div>
+      </div>
+      <div id="button">
+        <!-- <input type="submit" class="btn btn-primary" id="search" value='Search' disabled="true"> -->
+        <!-- [disabled]="!f.valid" -->
+        <button type="submit" class="btn btn-primary"
+          [disabled]="!(f.form.valid && getHere)">
+          <i class="fa fa-search"></i> Search
+        </button>
+        <button type="button" class="btn" id="clearButton" (click)="resetForm()">Clear</button>
+      </div>
+      <br>
+    </form>
+  </div>
+</div>

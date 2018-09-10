@@ -1,0 +1,39 @@
+input.ng-invalid.ng-touched {
+	border: red 2px solid;
+}
+
+.invalid-message {
+	color: red;
+}
+
+.outer {
+	border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(248, 248, 248);
+	padding: 5% 10% 5% 10%;
+	margin-top: 10px;
+	/*margin: 30px 10% 10px 10%;*/
+}
+
+span.red {
+	color: red;
+}
+
+.btn-outline-secondary {
+	color: black;
+	border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(255, 255, 255);
+}
+
+.btn-outline-secondary:hover {
+	background-color: rgb(225, 225, 225);
+}
+
+#clearButton {
+	color: black;
+	border: 1px solid rgb(230, 230, 230);
+	background-color: rgb(255, 255, 255);
+}
+
+.clearButton:hover {
+	background-color: rgb(225, 225, 225);
+}

@@ -1,0 +1,16 @@
+.container {
+	margin-bottom: 20px;
+}
+
+.highlight {
+	background-color: rgb(245, 218, 152);
+}
+.y-scroll {
+  overflow-y: scroll;
+}
+th {
+	white-space: nowrap;
+}
+td {
+	white-space: nowrap;
+}

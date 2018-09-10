@@ -1,0 +1,82 @@
+
+	<div class="text-center container">
+		<button class="btn" [class.btn-primary]="resultsSelected" [class.btn-white]="!resultsSelected" (click)="clickResults()">Results</button>
+		<button class="btn" [class.btn-primary]="!resultsSelected" [class.btn-white]="resultsSelected" (click)="clickFavorites()">Favorites</button>
+	</div>
+	<br>
+
+<div [@listAnimation]="listClicked">
+	
+	<button class="btn btn-light float-right details" [hidden]="detailsSelected||((!detailsSelected)&&((resultsSelected&&(resultsNoRecords||searchFail||(!formSubmitted)))||((!resultsSelected)&&favNoRecords)))" (click)="clickDetails()" [disabled]="!detailsEnabled">Details <i class="fas fa-chevron-right"></i></button><br><br>
+
+	<div *ngIf="!formClear">
+
+		<div class="progress" *ngIf="progressDisplay">
+		  <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
+
+		<div *ngIf="searchFail&&resultsSelected&&!detailsSelected">
+	        <br><br><br><br>
+			<div class="alert alert-danger" role="alert">
+			  Failed to get search results.
+			</div>
+			<br><br><br><br>
+		</div>
+
+		<!-- <div [hidden]="!formSubmitted> -->
+		<div *ngIf="formSubmitted||searchFail">
+		<!-- <div *ngIf="formSubmitted"> -->
+		<!-- 	<div [hidden]="detailsSelected">
+				<button class="btn btn-light float-right" (click)="clickDetails()" [disabled]="!detailsEnabled">Details <i class="fas fa-chevron-right"></i></button><br>
+				<app-results [hidden]="!resultsSelected" [searchData]="searchData" (details)="getDetails($event)" (detailPlace)="getDetailPlace($event)" (allPlaces)="getAllPlaces($event)" [allPlaces]="allPlaces" (favoriteArr)="getFavoriteArr($event)" [favoriteArr]="favoriteArr"></app-results>
+				<app-favorites [hidden]="resultsSelected" (details)="getDetails($event)" (detailPlace)="getDetailPlace($event)" (allPlaces)="getAllPlaces($event)" [allPlaces]="allPlaces" [favoriteArr]="favoriteArr" (favoriteArr)="getFavoriteArr($event)" [resultsSelected]="resultsSelected"></app-favorites>
+			</div>
+			<div [hidden]="!detailsSelected">
+				<app-details [place]="place" (list)='clickList($event)' (favoriteArr)="getFavoriteArr($event)" [favoriteArr]="favoriteArr"></app-details>
+			</div> -->
+
+			<!-- <div [hidden]="detailsSelected" [@listAnimation]="listClicked"> -->
+
+				<!-- <app-results [hidden]="!resultsSelected" [searchData]="searchData" (noRecordsEmitter)="getResultsNoRecords($event)" (details)="getDetails($event)" (detailPlace)="getDetailPlace($event)" (allPlaces)="getAllPlaces($event)" [allPlaces]="allPlaces" [placeSelected]="place"></app-results> -->
+				<app-results [hidden]="detailsSelected||(!resultsSelected)||searchFail" [searchData]="searchData" (noRecordsEmitter)="getResultsNoRecords($event)" (details)="getDetails($event)" (detailPlace)="getDetailPlace($event)" (allPlaces)="getAllPlaces($event)" [allPlaces]="allPlaces" [placeSelected]="placeSelected"></app-results>
+
+			<!-- </div> -->
+		</div>
+			<!-- <div [hidden]="!detailsSelected" [@detailsAnimation]="detailsClicked"> -->
+	</div>
+
+	<div>
+		<app-favorites [hidden]="resultsSelected||detailsSelected" (details)="getDetails($event)" (noRecordsEmitter)="getFavNoRecords($event)" (detailPlace)="getDetailPlace($event)" (allPlaces)="getAllPlaces($event)" [allPlaces]="allPlaces" [resultsSelected]="resultsSelected" [placeSelected]="placeSelected" (searchFail)="searchFail" [detailsDeletePlace]="favDeletePlace"></app-favorites>
+	</div>
+
+</div>
+
+<div [hidden]="!detailsSelected" [@detailsAnimation]="detailsSelected">
+	<app-details [place]="place" (list)='clickList($event)' (favDeleteEmitter)='favDelete($event)' (openHoursEmitter)="getOpenHours($event)"></app-details>
+</div>
+
+<div class="modal fade" id="hoursModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Open hours</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table class="table" id="hours">
+          <tbody>
+            <tr *ngFor="let day of openHours; let i = index" [class.bold]="i==0">
+              <td>{{day[0]}}</td>
+              <td>{{day[1]}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
