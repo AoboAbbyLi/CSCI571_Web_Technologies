@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/ScrollView01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="2dp">
+
+        <LinearLayout
+            android:id="@+id/LinearLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewKeyword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_keyword"></TextView>
+
+            <TextView
+                android:id="@+id/textViewPrompt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_prompt"
+                android:textColor="@color/colorRed"
+                android:visibility="gone"></TextView>
+
+            <EditText
+                android:id="@+id/editTextKeyword"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/edit_text_keyword"
+                android:inputType="textPersonName"></EditText>
+
+            <TextView
+                android:id="@+id/textViewCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_category"></TextView>
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <!--android:entries="@array/category"-->
+            </Spinner>
+
+            <TextView
+                android:id="@+id/textViewDistance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_distance" />
+
+            <EditText
+                android:id="@+id/editTextDistance"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter distance (default 10 miles)"
+                android:inputType="textPersonName" />
+
+            <TextView
+                android:id="@+id/textViewFrom"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_from" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/radioButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/radio_button_1" />
+
+
+                <RadioButton
+                    android:id="@+id/radioButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/radio_button_2" />
+
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/textViewPrompt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_view_prompt"
+                android:textColor="@color/colorRed"
+                android:visibility="gone"></TextView>
+
+            <!--<EditText-->
+                <!--android:id="@+id/editTextLocation"-->
+                <!--android:layout_width="fill_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_marginLeft="28dp"-->
+                <!--android:ems="10"-->
+                <!--android:hint="Type in the Location"-->
+                <!--android:inputType="textPersonName" />-->
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteFrom"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="28dp"
+                android:hint="Type in the Location" />
+
+            <LinearLayout
+                android:id="@+id/fromButtons"
+                android:layout_width="fill_parent"
+                android:layout_height="53dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/formSearchButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorGrey"
+                    android:onClick="onClick"
+                    android:text="SEARCH" />
+
+                <Button
+                    android:id="@+id/formClearButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_margin="5dp"
+                    android:background="@color/colorGrey"
+                    android:onClick="onClick"
+                    android:text="CLEAR" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+    </ScrollView>
+
+
+
+
+</android.support.constraint.ConstraintLayout>

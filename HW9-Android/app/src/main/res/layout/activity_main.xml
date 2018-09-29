@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!--<LinearLayout-->
+        <!--style="@android:style/ButtonBar"-->
+        <!--android:id="@+id/mainButtons"-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="53dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/searchButton"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:onClick="onClick"-->
+            <!--android:text="Search" />-->
+
+        <!--<Button-->
+            <!--android:id="@+id/favoritesButton"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:onClick="onClick"-->
+            <!--android:text="Favorites" />-->
+
+    <!--</LinearLayout>-->
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/mainViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    </android.support.v4.view.ViewPager>
+
+
+    <!--<fragment-->
+        <!--android:id="@+id/searchFragment"-->
+        <!--android:name="com.example.liaobo.myapplication.SearchFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--tools:layout="@layout/fragment_search"-->
+        <!--tools:layout_editor_absoluteX="0dp" />-->
+
+</android.support.constraint.ConstraintLayout>
